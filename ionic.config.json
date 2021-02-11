@@ -1,0 +1,7 @@
+{
+  "name": "kings School",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
