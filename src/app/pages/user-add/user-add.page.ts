@@ -3,15 +3,12 @@ import { User } from '../../models/user';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { UserServiceService } from '../../services/user-service.service';
-import { runInThisContext } from 'vm';
 import { ToastController } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.page.html',
   styleUrls: ['./user-add.page.scss'],
-  
 })
 
 export class UserAddPage implements OnInit {
@@ -19,44 +16,36 @@ export class UserAddPage implements OnInit {
   user: User = new User();
 
   constructor(
-    public toastController: ToastController,
     private storage: Storage,
     public alertController: AlertController,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    public toastController: ToastController
   ) { }
-  
-  async presentToast(texto:string) {
-    const toast = await this.toastController.create({
-      message: texto,
-      duration: 4000
-    });
-    toast.present();
-  }
-
 
   ngOnInit() {
   }
 
   buscaCEP() {
-    this.userService.pegaCep(this.user.cep).subscribe(
-      (res: User) => {
-        console.log(res);
-        if(res.erro){
-          this.presentToast("CEP não localizado!")
-        }else
-
-        //this.user = res; 
-        //this.user.cep = res.cep;
-        this.user.logradouro = res.logradouro;
-        this.user.cidade = res.cidade;
-        this.user.bairro = res.bairro;
-        this.user.uf = res.uf; 
-      },
-         error => {
-        console.error(error)
-      }
-    )
-  }
+      this.userService.pegaCep(this.user.cep).subscribe(
+        res => {
+          console.log(res);
+          if (res.erro) {
+            this.presentToast("CEP não localizado!");
+          } else {
+            //this.user = res;
+            //this.user.cep = res.cep;
+            this.user.logradouro = res.logradouro;
+            this.user.localidade = res.localidade;
+            this.user.bairro = res.bairro;
+            this.user.uf = res.uf;
+          }
+        },
+        error => {
+          console.error(error)
+        }
+      )
+    }
+  
 
   salvar() {
     try {
@@ -84,5 +73,12 @@ export class UserAddPage implements OnInit {
     await alert.present();
   }
 
+  async presentToast(texto: string) {
+    const toast = await this.toastController.create({
+      message: texto,
+      duration: 2000
+    });
+    toast.present();
+  }
 
 }
