@@ -2,8 +2,15 @@ export class User {
         nome:string;
         email:string;
         senha:string;
-        cep:string;
-        endereco:string;
-        bairro:string;
+
         numero:string;
+        complemento:string;
+
+        cep:string;
+        logradouro:string;
+        bairro:string;
+        cidade:string;
+        uf:string;
+
+        erro:boolean = false ;
 }
