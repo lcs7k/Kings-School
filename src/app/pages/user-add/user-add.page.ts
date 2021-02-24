@@ -26,29 +26,37 @@ export class UserAddPage implements OnInit {
   }
 
   buscaCEP() {
-      this.userService.pegaCep(this.user.cep).subscribe(
-        res => {
-          console.log(res);
-          if (res.erro) {
-            this.presentToast("CEP não localizado!");
-          } else {
-            //this.user = res;
-            //this.user.cep = res.cep;
-            this.user.logradouro = res.logradouro;
-            this.user.localidade = res.localidade;
-            this.user.bairro = res.bairro;
-            this.user.uf = res.uf;
-          }
-        },
-        error => {
-          console.error(error)
+    this.userService.pegaCep(this.user.cep).subscribe(
+      res => {
+        console.log(res);
+        if (res.erro) {
+          this.presentToast("CEP não localizado!");
+        } else {
+          //this.user = res;
+          //this.user.cep = res.cep;
+          this.user.logradouro = res.logradouro;
+          this.user.localidade = res.localidade;
+          this.user.bairro = res.bairro;
+          this.user.uf = res.uf;
         }
-      )
-    }
-  
+      },
+      error => {
+        console.error(error)
+      }
+    )
+  }
+
 
   salvar() {
     try {
+      this.userService.add(this.user).then(
+        res => {
+          console.log('Dados Salvos firebase...', this.user);
+        },
+        erro => {
+          console.log('Erro...', this.user);
+        }
+      );
       this.storage.set('nome', this.user.nome);
       this.storage.set('email', this.user.email);
       this.storage.set('senha', this.user.senha);

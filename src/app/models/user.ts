@@ -1,16 +1,16 @@
 export class User {
-        nome:string;
-        email:string;
-        senha:string;
+        nome: string;
+        email: string;
+        senha: string;
 
-        numero:string;
-        complemento:string;
+        numero: string;
+        complemento: string;
 
-        cep:string;
-        logradouro:string;
-        bairro:string;
-        localidade:string;
-        uf:string;
+        cep: string;
+        logradouro: string;
+        bairro: string;
+        localidade: string;
+        uf: string;
 
-        erro:boolean = false ;
+        erro: boolean = false;
 }

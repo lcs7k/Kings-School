@@ -10,17 +10,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { IonicStorageModule } from '@ionic/storage';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule, 
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     IonicStorageModule.forRoot(),
-    HttpClientModule],
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -28,4 +36,4 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
